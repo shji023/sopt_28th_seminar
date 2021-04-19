@@ -2,9 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
   
-  body {
+body {
     width: 100vw;
     height: 100vh;
     background-color: rgb(145, 170, 220);
@@ -13,27 +13,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+}
   
-  .bottom {
+.bottom {
     color: rgb(95, 45, 90);
     font-size: 40px;
     font-weight: bold;
     margin-top: 50px;
-  }
+}
     
-  .digital {
+.digital {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-  }
-  
-  .digital_time {
+}
+
+.digital_time {
     font-size: 120px;
     font-weight: bold;
-  }
-  
-  .digital_button {
+}
+
+.digital_button {
     color: white;
     background-color: rgb(95, 45, 90);
     border: 1px solid white;
@@ -44,9 +44,9 @@
     height: 36px;
     width: 50px;
     font-size: 18px;
-  }
+}
 
-  .analog_clock {
+.analog_clock {
     width: 220px;
     height: 220px;
     border:5px solid rgb(95, 45, 90);
@@ -55,90 +55,133 @@
     color: rgb(95, 45, 90);
     margin: 50px auto;
     position: relative;
-  }
-  
-  .analog_clock .clock_number {
+}
+
+.analog_clock .clock_number {
     position:absolute;
     z-index: 1;
     font-size: 18px;
-  }
+}
 
-  .analog_clock #num3{
+.analog_clock #num3{
     top: 0;
     bottom: 0;
     display: flex;
     align-items: center;
     right: 2px;
-  }
+}
 
-  .analog_clock #num6{
+.analog_clock #num6{
     left: 0;
     right: 0;
     text-align: center;
     bottom: 0;
-  }
+}
 
-  .analog_clock #num9{
+.analog_clock #num9{
     top: 0;
     bottom: 0;
     display: flex;
     align-items: center;
     left: 2px;
-  }
+}
 
-  .analog_clock #num9{
+.analog_clock #num9{
     top: 0;
     bottom: 0;
     display: flex;
     align-items: center;
     left: 2px;
-  }
+}
 
-  .analog_clock #num12{
+.analog_clock #num12{
     left: 0;
     right: 0;
     text-align: center;
     top: 0;
-  }
+}
 
-  .analog_hour,
-  .analog_minute,
-  .analog_second {
+.analog_hour,
+.analog_minute,
+.analog_second {
     height: 2px; /* 바늘의 두께 */
     border-radius: 1px;
     position: relative;
     transform-origin: 100%; /* 오른쪽 끝을 기준으로 회전 */
     transform: rotate(90deg);
-  }
-  
-  .analog_hour {
+}
+
+.analog_hour {
     height: 5px;
     z-index: 2;
     width: 60px;
     top: 100px;
     left: 40px;
     background-color: rgb(95, 45, 90);
-  }
-  
-  .analog_minute {
+}
+
+.analog_minute {
     z-index: 1;
     width: 90px;
     top: 98px;
     left: 10px;
     background-color: rgb(95, 45, 90);
-  }
-  
-  .analog_second {
+}
+
+.analog_second {
     z-index: 3;
     width: 90px;
     top: 96px;
     left: 10px;
     background-color: rgb(145, 170, 220);
-  }
-  
-  .clock {
+}
+
+.header {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 100px;
-  }
+}
+
+.middle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+  
+.weather {
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+}
+
+.weather_top {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.weather_temperature {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.weather_main {
+    font-size: 32px;
+    margin-left: 30px;
+    text-align: bottom;
+}
+
+.weather_temps,
+.weather_others {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.weather_temps > span,
+.weather_others > span {
+    color: lightgray;
+}
