@@ -46,6 +46,16 @@ body {
     font-size: 18px;
 }
 
+.digital_button:focus {
+    outline: none;
+}
+
+.digital_button:hover {
+    cursor: pointer;
+    background-color: white;
+    color: rgb(145, 170, 220);
+}
+
 .analog_clock {
     width: 220px;
     height: 220px;
