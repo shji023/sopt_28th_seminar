@@ -3,20 +3,22 @@ function myFunction() {
     element.classList.toggle("dark-mode");
  }
 
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("myBtn");
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+ const modalBackground = document.getElementById("modalBackground");
+ const modalBtn = document.getElementById("modalBtn");
+ const span = document.getElementsByClassName("close")[0];
+ 
+ 
+ const handleDisplay = (value) => {
+     if (value == 'open')
+         modalBackground.style.display = "block";
+     else if(value == 'close')
+         modalBackground.style.display = "none";
+     else if(value.target == modalBackground)
+         modalBackground.style.display = "none";
+ }
+ 
+ 
+ modalBtn.addEventListener("click",()=>{handleDisplay('open')});
+ span.addEventListener("click",()=>{handleDisplay('close')});
+ window.addEventListener("click", ()=>{handleDisplay(event)});
+ 
