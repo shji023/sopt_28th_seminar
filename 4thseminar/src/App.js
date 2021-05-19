@@ -23,7 +23,6 @@ function App() {
     (async()=>{
       const data = await getCardData();
       data[year]&&setUserData(data[year][month]);
-      // data[year] && setUserData(data[year][month]);
     })();
   }, [year, month]);
 
