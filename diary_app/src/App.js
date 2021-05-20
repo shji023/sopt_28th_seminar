@@ -5,8 +5,8 @@ import Calendar from './components/common/Calendar'
 import Title from './components/common/Title'
 import Footer from './components/common/Footer'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useState } from 'react';
-
+import { useState,useEffect } from 'react';
+import  getUserData from './lib/api';
 
 const getCurrDate = () => {
   const now = new Date();
@@ -19,7 +19,16 @@ const getCurrDate = () => {
 function App() {
   const [year, setYear] = useState(getCurrDate().year);
   const [month, setMonth] = useState(getCurrDate().month);
+  const [userData, setUserData] = useState(null);
  
+  useEffect(()=>{
+    (async()=>{
+      const data = await getUserData();
+      data[year]&&setUserData(data[year][month]);
+      console.log(data);
+    })();
+  },[year, month]);
+{/*함수를 실행하려면 async함수 전체를 소괄호로 묶고 뒤에 실행*/}
   return (
     <>
     <BrowserRouter>
@@ -32,7 +41,7 @@ function App() {
     </Calendar>
     <Title></Title>
       <Switch>
-      <Route exact path="/" component={Main} />
+      <Route exact path="/" component={()=>{return <Main props={userData}/>}} />
       {/*다이어리를 가져올 때 주소가 아이디마다 달라지기에*/}
       <Route exact path="/diary/:id" component={Diary} />
       {/*주소를 잘못 입력했을경우*/}

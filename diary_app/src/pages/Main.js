@@ -1,10 +1,22 @@
 import React from 'react';
+import Card from '../components/main/Card';
+import Styled from 'styled-components';
 
-const Main = () => {
+const MainWrap = Styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  row-gap: 25px;
+`;
+
+const Main = ({props}) => {
+    console.log(props);
     return (
-        <div>
-            Main Page
-        </div>
+        <MainWrap>
+        {props && props.map((data, index)=>{
+          return <Card key={index} props={data} />
+          }
+        )}
+        </MainWrap>
     );
 };
 
