@@ -5,14 +5,32 @@ import Calendar from './components/common/Calendar'
 import Title from './components/common/Title'
 import Footer from './components/common/Footer'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useState } from 'react';
+
+
+const getCurrDate = () => {
+  const now = new Date();
+  const currYear = now.getFullYear();
+  const currMonth = now.getMonth();
+  {/*한꺼번에 리턴하기 위해선 객체로 리턴*/}
+  return {year:currYear, month: currMonth};
+}
 
 function App() {
+  const [year, setYear] = useState(getCurrDate().year);
+  const [month, setMonth] = useState(getCurrDate().month);
+ 
   return (
     <>
-    <MainHeader></MainHeader>
-    <Calendar></Calendar>
-    <Title></Title>
     <BrowserRouter>
+    <MainHeader></MainHeader>
+    <Calendar 
+      currYear={year} 
+      setCurrYear={setYear} 
+      currMonth={month} 
+      setCurrMonth={setMonth}>
+    </Calendar>
+    <Title></Title>
       <Switch>
       <Route exact path="/" component={Main} />
       {/*다이어리를 가져올 때 주소가 아이디마다 달라지기에*/}
