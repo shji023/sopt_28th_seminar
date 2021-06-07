@@ -1,6 +1,9 @@
-import React from 'react';
-import Card from '../components/main/Card';
-import Styled from 'styled-components';
+import React from "react";
+import { useState, useEffect } from "react";
+import Card from "../components/main/Card";
+import Styled from "styled-components";
+import NewCard from "../components/main/NewCard";
+import { getUserData } from "../lib/api";
 
 const MainWrap = Styled.div`
   display: grid;
@@ -8,16 +11,35 @@ const MainWrap = Styled.div`
   row-gap: 25px;
 `;
 
-const Main = ({props}) => {
-    console.log(props);
-    return (
-        <MainWrap>
-        {props && props.map((data, index)=>{
-          return <Card key={index} props={data} />
-          }
-        )}
-        </MainWrap>
-    );
+const Main = ({ year, month }) => {
+  const [userData, setUserData] = useState(null);
+  const [rawData, setRawData] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const data = await getUserData();
+      setRawData(data);
+      data[year] && setUserData(data[year][month]);
+      console.log(data);
+    })();
+  }, [year, month]);
+  /*함수를 실행하려면 async함수 전체를 소괄호로 묶고 뒤에 실행*/
+
+  return (
+    <MainWrap>
+      {userData &&
+        userData.map((data, index) => {
+          return <Card key={index} props={data} />;
+        })}
+      <NewCard
+        rawData={rawData}
+        year={year}
+        month={month}
+        setUserData={setUserData}
+        id={userData ? userData.length + 1 : 1}
+      ></NewCard>
+    </MainWrap>
+  );
 };
 
 export default Main;
