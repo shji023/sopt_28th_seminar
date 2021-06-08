@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import Styled from "styled-components";
+import CardHeader from "../diary/CardHeader";
+import CardInfo from "../diary/CardInfo";
+import { createCardData } from "../../lib/api";
 
 const CardWrap = Styled.div`
   width: 785px;
@@ -30,18 +33,46 @@ const CardWrap = Styled.div`
   }
 `;
 
-const Card = ({ data, match }) => {
+const Card = ({ data, match, history, rawData, year, month }) => {
   const isReadOnly = match.path === "/diary/:id" ? true : false;
-  const { title, date, image, weather, tags, summary, text } = data;
+  const [state, setState] = useState(data);
+  const id = parseInt(match.params.id);
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    setState({
+      ...state,
+      [name]: event.target.value,
+    });
+  };
+
+  const handleEdit = async () => {
+    const index = rawData[year][month].findIndex((data) => data.id === id);
+    rawData[year][month][index] = state;
+    const data = await createCardData(rawData);
+    history.goBack();
+  };
+
   return (
     <CardWrap>
-      <p>{title}</p>
-      <p>{date}</p>
-      <img src={image} width="200px" alt="" />
-      <p>{weather}</p>
-      <p>{tags}</p>
-      <p>{summary}</p>
-      <p>{text}</p>
+      <CardHeader
+        title={state.title}
+        isReadOnly={isReadOnly}
+        handleChange={handleChange}
+        handleEdit={handleEdit}
+      />
+      <CardInfo
+        data={state}
+        isReadOnly={isReadOnly}
+        handleChange={handleChange}
+      />
+      <textarea
+        placeholder="오늘을 기록해 주세요"
+        readOnly={isReadOnly}
+        value={state.text}
+        name="text"
+        onChange={handleChange}
+      />
     </CardWrap>
   );
 };
